@@ -1,6 +1,6 @@
 import sys
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import size
+from pyspark.sql.functions import size, col
 from pyspark import SparkContext, SparkConf
 # you may add more import if you need to
 
@@ -8,7 +8,7 @@ from pyspark import SparkContext, SparkConf
 # don't change this line
 hdfs_nn = sys.argv[1]
 
-conf = SparkConf().setAppName("Wordcount Application")
+conf = SparkConf().setAppName("Assignment2 Question 1")
 sc = SparkContext(conf=conf)
 spark = SparkSession(sc)
 # YOUR CODE GOES BELOW
@@ -19,7 +19,7 @@ df = spark.read.option("header", True).csv(
 df.printSchema()
 original_count = df.count()
 rating_filter = df.filter(df.Rating > 1)
-full_filter = rating_filter.filter(df.Reviews.isNotNull())
+full_filter = rating_filter.filter(col("Number of Reviews").isNotNull())
 
 full_filtered_count = full_filter.count()
 # df.filter(df.Rating < 1).show()
