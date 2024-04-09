@@ -20,15 +20,8 @@ df.printSchema()
 original_count = df.count()
 rating_filter = df.filter(df.Rating > 1)
 full_filter = rating_filter.filter(col("Number of Reviews").isNotNull())
-
+full_filter.show()
 full_filtered_count = full_filter.count()
-# df.filter(df.Rating < 1).show()
-# rating_count = rating_filter.count()
-# review_filter = df.filter(df.Reviews.isNotNull())
-# review_count = review_filter.count()
-# print(
-#     f"original_count:{original_count}, rating_count{rating_count},review_count:{review_count}, full filter count:{full_filtered_count}"
-# )
 
 
 full_filter.write.format("csv").save("/assignment2/output/question1/")
