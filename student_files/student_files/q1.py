@@ -18,7 +18,7 @@ df = spark.read.option("header", True).csv(
 )
 df.printSchema()
 original_count = df.count()
-rating_filter = df.filter(df.Rating > 1)
+rating_filter = df.filter(df.Rating >= 1)
 full_filter = rating_filter.filter(col("Number of Reviews").isNotNull())
 full_filter.show()
 full_filtered_count = full_filter.count()
